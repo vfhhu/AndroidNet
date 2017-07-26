@@ -37,6 +37,12 @@ public class SocketClient implements Runnable {
     }
 
     public void init() {
+
+        new Thread(this, "SocketClient.init").start();
+
+    }
+    @Override
+    public void run() {
         close();
         socket = new Socket();
         InetSocketAddress isa = new InetSocketAddress(this.address, this.port);
@@ -47,14 +53,12 @@ public class SocketClient implements Runnable {
             readerB = new BufferedReader(reader);
             wt = new OutputStreamWriter(socket.getOutputStream(), "UTF-8");
             out = new BufferedWriter(wt);
-            new Thread(this, "SocketClient.init").start();
         } catch (Exception e) {
             e.printStackTrace();
             close();
+            return;
         }
-    }
-    @Override
-    public void run() {
+
         if(listener!=null)listener.onConnected(this);
         isClose = false;
         while (!isClose) {
