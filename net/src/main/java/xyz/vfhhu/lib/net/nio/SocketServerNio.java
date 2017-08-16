@@ -31,6 +31,7 @@ public class SocketServerNio {
     private InetSocketAddress listenAddress;
     private ConcurrentHashMap <SocketChannel,List> dataMapper;
     private Thread readT;
+    private String endChar=DataEndChar.N;
     public SocketServerNio( int port) {
         this.port = port;
         listenAddress = new InetSocketAddress( port);
@@ -235,5 +236,12 @@ public class SocketServerNio {
             channel.close();
         }
         return false;
+    }
+    public String getEndChar() {
+        return endChar;
+    }
+
+    public void setEndChar(String endChar) {
+        this.endChar = endChar;
     }
 }

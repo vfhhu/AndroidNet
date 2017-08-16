@@ -6,6 +6,7 @@ package xyz.vfhhu.lib.net.nio;
 
 public interface OnSocketClientListener {
     void onSend(String src, SocketClient client);
+    void onData(byte[] src, SocketClient client);
     void onData(String src, SocketClient client);
     void onConnected(SocketClient client);
     void onClosed(SocketClient client);
